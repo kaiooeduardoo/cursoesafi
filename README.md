@@ -26,3 +26,8 @@ A página abre com **dados de demonstração da Paraíba, de 15/07/2026**. Ao im
 **Netlify:** Add new project → Import an existing project → GitHub → selecione o repositório; build command em branco, publish directory `.`.
 
 Este é um protótipo didático, não um sistema oficial de transparência governamental.
+
+
+## Kit público de IA
+
+O botão **Criar minha análise com IA** abre `como-usar.html`. Mantenha `INSTRUCOES_CHATGPT.md`, `CRITERIOS_EXTRACAO.md`, `MODELO_EXTRACAO.xlsx` e `PROMPT_EXEMPLO.txt` na raiz do repositório.
