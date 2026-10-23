@@ -1,33 +1,17 @@
-# Observatório DOE Brasil — Dashboard público
+# Observatório DOE Brasil — site público (v3.0)
 
-Painel estático para apresentar dados de convênios e parcerias extraídos de Diários Oficiais estaduais.
+Site estático para GitHub Pages. Abra `index.html` para visualizar e importar planilhas XLSX; o dashboard identifica a UF por sua coluna na aba `Instrumentos`. `como-usar.html` orienta a configuração do ChatGPT e disponibiliza o kit de fontes.
 
-## Como usar
+## Arquivos
+- `index.html`: dashboard com importação local de Excel, filtros e visualização.
+- `como-usar.html`: guia público, incluindo os critérios v3.0.
+- `INSTRUCOES_CHATGPT.md`: instruções resumidas a colar no Projeto.
+- `CRITERIOS_EXTRACAO.md`: documento v3.0 de extração, classificação, cobertura e validação.
+- `MODELO_EXTRACAO.xlsx`: contrato das seis abas e colunas.
+- `PROMPT_EXEMPLO.txt`: exemplo reutilizável.
 
-1. Abra a página publicada em GitHub Pages ou Netlify.
-2. Selecione a UF de origem da planilha.
-3. Clique em **Escolher Excel** e importe um `.xlsx` com abas `Instrumentos` e `Aditivos` no padrão do modelo.
-4. Explore filtros e indicadores. Exporte CSV ou use **Salvar PDF**.
+## Publicação
+Copie todos os arquivos para a raiz do repositório GitHub Pages, preservando nomes e caminhos. Não precisa de servidor nem de API de IA; o ChatGPT produz o Excel separadamente.
 
-A página abre com **dados de demonstração da Paraíba, de 15/07/2026**. Ao importar outro Excel, esses dados são substituídos. Selecionar uma UF **não consulta automaticamente** o DOE daquele estado.
-
-## Segurança e limites
-
-- Todo o processamento do arquivo é feito **no navegador**, sem upload para servidor.
-- Não há API, backend nem armazenamento remoto dos dados importados.
-- O HTML inclui uma biblioteca JavaScript para leitura de XLSX e os dados de demonstração da Paraíba.
-- A planilha é a fonte dos indicadores; confira os atos e valores no diário oficial de origem.
-- O painel espera colunas `Tipo de instrumento`, `Valor original (R$)`, `Órgão concedente` etc.; exportações com outro esquema precisam ser adaptadas.
-
-## Hospedagem
-
-**GitHub Pages:** Settings → Pages → Deploy from a branch → `main` / `(root)` → Save.
-
-**Netlify:** Add new project → Import an existing project → GitHub → selecione o repositório; build command em branco, publish directory `.`.
-
-Este é um protótipo didático, não um sistema oficial de transparência governamental.
-
-
-## Kit público de IA
-
-O botão **Criar minha análise com IA** abre `como-usar.html`. Mantenha `INSTRUCOES_CHATGPT.md`, `CRITERIOS_EXTRACAO.md`, `MODELO_EXTRACAO.xlsx` e `PROMPT_EXEMPLO.txt` na raiz do repositório.
+## Limites
+O site não baixa nem analisa PDFs de Diário Oficial: apenas lê planilhas geradas por IA. Conteúdos extraídos exigem conferência humana na publicação oficial. Não interprete valor formalizado como pagamento executado.

@@ -1,81 +1,120 @@
-# Observatório DOE Brasil — Convênios e Parcerias
+# Observatório DOE Brasil — Objetivo e Critérios de Extração
 
-**Documento de referência para o Projeto ChatGPT | Versão 2.0 — outubro de 2026**
+**Versão:** 3.0  
+**Abrangência:** Diários Oficiais dos estados brasileiros  
+**Finalidade:** orientar a extração verificável de convênios e parcerias para o dashboard Observatório DOE Brasil.
 
-## 1. Finalidade
+## 1. Objetivo
 
-Transformar publicações dos Diários Oficiais dos estados brasileiros e do Distrito Federal em dados estruturados, conferíveis e compatíveis com o **dashboard Observatório DOE Brasil**. O foco é identificar convênios, termos de fomento, termos de colaboração, outras parcerias e seus atos de alteração. O observatório acompanha **publicações**, não comprova pagamentos ou execução financeira.
+Identificar, classificar e extrair atos de convênios e parcerias publicados em Diários Oficiais estaduais, gerando uma planilha Excel compatível com o modelo fornecido. Priorizar **completude, precisão, rastreabilidade e classificação financeira correta**.
 
-## 2. Fontes e abrangência
+## 2. Fontes e prioridade
 
-- O usuário informa a **UF** e a **data ou período** que deseja analisar, ou fornece o PDF/URL oficial.
-- Para cada consulta, priorizar **PDFs anexados** e **portais oficiais do Diário Oficial da UF escolhida**. Verificar a autenticidade e a correspondência entre edição, data e URL.
-- Examinar cada edição e suplemento pertinente separadamente. Não pressupor que todos os estados usam o mesmo portal, numeração de edição ou estrutura editorial.
-- O **Markdown** e a **planilha-modelo Excel** são referências permanentes; PDFs de edições são insumos variáveis, e não devem ser tratados como fonte-padrão para outras UFs.
-- Na ausência de acesso ao PDF oficial, informar a limitação e solicitar o arquivo ou link acessível, sem inventar resultados.
+1. **Publicação oficial:** PDF anexado ou endereço verificável do Diário Oficial correspondente à UF e ao período solicitado.
+2. **Planilha-modelo XLSX:** contrato obrigatório de nomes das seis abas, cabeçalhos, ordem de colunas, formatos e organização.
+3. **Este Markdown:** critérios de seleção, extração e controle de qualidade.
 
-## 3. Escopo documental
+O DOE é a evidência dos registros; o modelo Excel é a referência da estrutura de entrega. Para uma nova análise, utilizar a edição solicitada, sem transferir dados de edições anteriores.
 
-**Incluir no núcleo do observatório:** convênios, termos de fomento, termos de colaboração, instrumentos de parceria equivalentes e aditivos, apostilamentos, prorrogações, rescisões e retificações diretamente relacionados.
+## 3. Escopo e critérios de inclusão
 
-**Classificar separadamente:** termos de execução descentralizada (TEDs) e outros instrumentos orçamentários correlatos. Não misturá-los aos totais de convênios e parcerias.
+**Incluir como instrumentos principais**, quando a natureza jurídica da publicação corresponder ao escopo:
+- Convênios e instrumentos de parceria pública;
+- Termos de fomento;
+- Termos de colaboração.
 
-**Excluir:** nomeações, exonerações e publicações sem relação com o escopo.
+**Incluir como alterações vinculadas**, quando relacionadas aos instrumentos acima:
+- Termos aditivos, prorrogações, apostilamentos, retificações, rescisões e revogações;
+- Alterações de valor, objeto, vigência ou identificação, registrando seu efeito específico.
 
-## 4. Método de extração
+**Classificar separadamente**, se encontrados:
+- Termos de Execução Descentralizada (TED) e outros instrumentos correlatos claramente identificáveis.
 
-1. Delimitar UF, período, edições e suplementos previstos.
-2. Ler cada PDF, identificar atos relevantes e registrar a **página impressa**; se a numeração impressa estiver ausente, informar a página do PDF e essa distinção.
-3. Extrair nomes, números, datas e valores como publicados; resumir o objeto sem alterar seu sentido.
-4. Separar instrumentos originais de alterações e vincular aditivos ao instrumento de origem **apenas quando houver evidência suficiente**.
-5. Identificar republicações e possíveis duplicatas sem suprimir o histórico ou as referências.
-6. Preencher a planilha-modelo, preservando **exatamente os nomes das abas e das colunas** existentes.
-7. Registrar o que foi efetivamente examinado, pendências e limitações de leitura.
+**Fora do escopo principal:** nomeações, exonerações, contratos comuns de fornecimento e prestação de serviços, editais e licitações sem instrumento de convênio/parceria, atos meramente orçamentários e outras publicações sem vínculo demonstrado ao escopo. Sua existência não deve aumentar contagens nem valores de convênios.
 
-## 5. Campos e estrutura da planilha
+### Busca por denominações equivalentes
 
-A **planilha-modelo XLSX anexada ao projeto é o contrato de dados** para o dashboard. Manter as seis abas:
+Usar títulos e expressões como **extrato de convênio**, **extrato de parceria**, **termo de fomento**, **termo de colaboração**, **acordo de cooperação**, **termo aditivo**, **apostilamento**, **prorrogação**, **retificação** e **rescisão** como *indícios para examinar o teor do ato*, e não como inclusão automática. Um acordo de cooperação só será incluído quando demonstrado seu enquadramento no escopo; na dúvida, registrar pendência de classificação.
 
-- **Instrumentos** — um registro por instrumento original; contempla `UF`, `Data DOE`, `Tipo de instrumento`, `Número do instrumento`, `Órgão concedente`, `Beneficiário`, `Município`, `Objeto`, valores, vigência, edição, página, URL, evidência e conferência.
-- **Aditivos** — uma linha por ato de alteração identificado, com seu instrumento original, tipo de alteração, valores, datas e evidências.
-- **Resumo por órgão** — agregação dos instrumentos originais, com aditivos contabilizados separadamente.
-- **Resumo por município** — agregação por município, sem presumir localidades ausentes.
-- **Controle das edições** — documentação de cada edição/suplemento, páginas, status, URL e eventuais lacunas.
-- **Dicionário de dados** — definições e orientações de preenchimento.
+## 4. Procedimento em duas passagens
 
-**Importante:** a aba `Instrumentos` já possui a coluna `UF`. Não renomear, remover, reordenar ou acrescentar colunas por conta própria. A aba `Aditivos` do modelo atual não possui coluna `UF`; não inserir uma nova coluna sem atualização coordenada do modelo e do dashboard. Em análises envolvendo várias UFs, entregar arquivos separados por UF, a menos que exista um modelo revisado para consolidação nacional.
+### Passagem A — Identificação e cobertura
 
-## 6. Padrões de preenchimento
+1. Identificar UF, data, edição, documento e quantidade de páginas efetivamente disponíveis.
+2. Delimitar o conjunto de PDFs/edições solicitado; tratar suplementos somente quando efetivamente disponíveis e dentro do pedido.
+3. Examinar cada página do conjunto, inclusive seções com títulos genéricos, tabelas e continuações de atos entre páginas.
+4. Registrar internamente páginas e publicações candidatas, incluindo nome do instrumento, número ou partes quando disponíveis.
+5. Classificar provisoriamente cada candidata como **instrumento original**, **alteração**, **correlato** ou **fora do escopo**.
 
-- **UF:** sigla oficial de duas letras na aba `Instrumentos` (ex.: PB, PE, RN).
-- **Valores:** números reais em células numéricas do Excel, sem escrever `R$` no conteúdo; valores desconhecidos ficam em branco.
-- **Datas:** datas reais reconhecidas pelo Excel, quando possível; jamais estimar datas incompletas.
-- **Campos textuais ausentes:** preencher com `Não informado`, quando adequado.
-- **Referência:** informar edição, data, página e URL oficial do PDF, sempre que verificáveis.
-- **Evidência:** preservar um trecho breve e fiel à publicação que sustente a classificação e os principais dados.
-- **Status:** sinalizar `Pendente` ou `Divergente` e explicar nos campos de observação quando houver dúvida, inconsistência ou leitura incompleta.
+### Passagem B — Extração e conferência
 
-## 7. Integridade dos indicadores
+1. Reler as páginas candidatas e o contexto necessário para confirmar a natureza de cada ato.
+2. Extrair os campos do Excel a partir da publicação, preservando grafia, números e valores.
+3. Verificar número do instrumento, órgão, beneficiário, processo, objeto, vigência, assinatura, montantes e referência de origem.
+4. Relacionar alterações ao instrumento original apenas quando a identificação for suficiente; manter vínculo pendente caso contrário.
+5. Conferir que cada publicação relevante identificada na passagem A tem um registro apropriado na saída, ou justificativa documentada para sua exclusão.
+6. Reconciliar total de registros por categoria com as linhas da planilha, separando originais, alterações e correlatos.
 
-- **Não** contabilizar o mesmo instrumento duas vezes por causa de republicações.
-- Separar **valor original**, **acréscimo financeiro efetivo**, **rendimentos financeiros**, **valor global atualizado** e alterações **sem impacto financeiro**.
-- Não somar valores originais com os valores globais atualizados do mesmo instrumento.
-- Não somar TEDs aos totais do núcleo de convênios/parcerias.
-- Não apresentar valores firmados/publicados como se fossem pagamentos realizados.
-- Quando o mesmo ato aparecer em mais de uma edição, manter referência das ocorrências e registrar qual publicação sustenta o registro consolidado.
+A segunda passagem é uma revisão **direcionada** das páginas candidatas e das lacunas identificadas, não a repetição indiscriminada da leitura integral.
 
-## 8. Controle de cobertura e validação
+## 5. Campos e rastreabilidade
 
-Informar: UF, período, quantidade de edições previstas, edições efetivamente lidas, suplementos considerados, número de páginas lidas, páginas não lidas e registros extraídos por categoria.
+Preencher os campos previstos no XLSX, incluindo, quando disponíveis: **UF, data do DOE, edição, tipo, órgão concedente, beneficiário, município, número do instrumento, cadastro/processo, objeto, valor, vigência, aditivos, URL e página original**.
 
-**Somente declarar análise integral** depois da leitura efetiva de todos os documentos e páginas previstos no escopo. Se houver restrição técnica, página ilegível ou edição indisponível, apresentar cobertura **parcial** e descrever as lacunas.
+- Registrar `Não informado` nos campos textuais sem evidência na publicação; manter campos monetários vazios quando o valor não constar, conforme a tipagem do modelo.
+- Identificar datas deduzidas de regra explícita (por exemplo, início no dia seguinte à publicação) como **derivadas da regra publicada**, nunca como datas literalmente escritas.
+- Registrar página **impressa** da publicação quando disponível; distinguir da página do visualizador/PDF se forem diferentes.
+- Usar a URL exata e verificável da fonte consultada. Para PDF enviado sem endereço validado, registrar a referência ao arquivo e indicar URL não informada.
+- Sinalizar trechos ilegíveis, divergências e dados incertos para conferência humana.
 
-Recomendar validação humana dos registros e valores antes de decisões administrativas ou divulgação como dados oficiais consolidados.
+## 6. Regras de classificação e valores
 
-## 9. Entregável padrão
+- **Instrumento original:** registrar uma vez por identidade verificável; publicações repetidas não devem criar novos instrumentos.
+- **Aditivo sem acréscimo financeiro:** registrar alteração de vigência ou condição sem criar novo repasse.
+- **Aditivo com efeitos financeiros:** registrar separadamente o tipo de efeito (acréscimo, supressão, rendimentos incorporados, atualização do total), sem confundir o valor atualizado com novo repasse.
+- **TED e correlatos:** contabilizar em indicadores distintos de convênios e parcerias.
+- **Valor formalizado não equivale a pagamento ou transferência efetiva**; não inferir execução financeira a partir do extrato.
+- **Somatórios:** agregar apenas valores compatíveis na mesma categoria, evitando somar original, acumulado e aditivo como montantes independentes.
+- **Duplicidade:** comparar natureza, número, órgão, partes, data e histórico; quando houver incerteza, sinalizar em vez de excluir por suposição.
 
-Gerar **um arquivo Excel (.xlsx) preenchido**, mantendo as seis abas e o layout lógico do modelo do projeto, pronto para importação no dashboard. Na resposta, apresentar um resumo objetivo: UF, período, cobertura da leitura, quantidades por natureza, valores segregados e limitações. **Não gerar PDF automaticamente**; gerar somente se solicitado.
+## 7. Qualidade e controle de completude
 
-## 10. Limites e evolução
+A análise deverá:
 
-O dashboard é uma camada de **visualização de planilhas**, não um coletor automático de Diários Oficiais. A coleta e a extração são realizadas em cada análise no ChatGPT ou em um processo externo. A compatibilidade efetiva deve ser verificada importando um Excel de teste no dashboard publicado após qualquer alteração do modelo.
+- Relacionar as edições, PDFs e páginas efetivamente examinados, indicando o que ficou pendente ou inacessível.
+- Conferir todos os atos candidatos identificados na primeira passagem e justificar exclusões duvidosas.
+- Distinguir **documento integralmente examinado** de **edição inteira coberta**: um PDF de uma página pode representar apenas recorte da edição.
+- Declarar cobertura integral apenas quando todo o conjunto documental solicitado tiver sido examinado.
+- Registrar omissões potenciais causadas por digitalizações ruins, arquivos protegidos, suplementos não obtidos ou seções ilegíveis.
+- Entregar resultados como extração documental sujeita a conferência humana, sem prometer ausência absoluta de erros.
+
+## 8. Excel — contrato de compatibilidade
+
+1. Preferir criar uma **cópia preenchida do XLSX-modelo**.
+2. Preservar exatamente **as seis abas**, seus nomes, cabeçalhos, ordem e tipagem das colunas.
+3. Manter valores monetários numéricos e datas reconhecíveis pelo Excel; preservar identificadores como texto quando necessário.
+4. Preencher corretamente a coluna **UF** em cada registro para identificação automática no dashboard.
+5. Manter instrumentos, aditivos, resumos e controle das edições nas abas correspondentes.
+6. Validar o arquivo final contra o modelo e conferir se o total por categoria corresponde às linhas efetivas.
+7. Caso a planilha-modelo não esteja acessível ou uma incompatibilidade impeça a geração fiel, informar o bloqueio em vez de criar estrutura divergente silenciosamente.
+
+## 9. Eficiência operacional
+
+- Para testes curtos, examinar somente a publicação/arquivo solicitado.
+- Em períodos extensos, dividir o trabalho em lotes identificados e registrar quais foram concluídos.
+- Reutilizar dados previamente validados quando fornecidos, sem reler documentos desnecessariamente.
+- Produzir **Excel como entrega padrão**; gerar PDF ou outros relatórios mediante solicitação.
+- Priorizar documentação da cobertura e correção dos dados sobre estimativas de velocidade.
+
+## 10. Entrega
+
+Apresentar de maneira objetiva:
+
+- UF, data/período e documentos examinados;
+- Páginas efetivamente examinadas e limite de cobertura;
+- Número de instrumentos originais, alterações e correlatos;
+- Valores separados por natureza, com ressalvas financeiras relevantes;
+- Pendências, inconsistências e restrições de leitura;
+- Link para baixar o **XLSX compatível com o dashboard**.
+
+**Critério final:** todo registro incluído deve ter evidência verificável; todo ato relevante identificado deve estar representado ou ter sua ausência justificada.

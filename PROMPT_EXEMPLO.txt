@@ -1,5 +1,7 @@
 Analise os convênios e parcerias publicados no Diário Oficial da UF [UF], na data [DATA], utilizando este PDF ou link oficial: [LINK OU PDF ANEXADO].
 
-Siga as instruções e critérios do Observatório DOE Brasil. Analise somente o documento indicado, classifique instrumentos originais e aditivos, registre a página e a URL de origem e gere um arquivo Excel com as seis abas e as colunas exatamente como no MODELO_EXTRACAO.xlsx, compatível com o dashboard.
+Use as instruções e as fontes do Observatório DOE Brasil. Examine exclusivamente o documento solicitado em duas passagens: (1) identificação dos atos candidatos em todas as páginas fornecidas; (2) extração e conferência direcionadas dos atos relevantes.
 
-Apresente um resumo breve dos registros encontrados e das limitações de cobertura. Não invente dados ausentes nem consulte outras edições.
+Classifique separadamente instrumentos originais, aditivos/alterações e TEDs/correlatos. Registre UF, número, órgão, beneficiário, objeto, valor, vigência, página impressa e URL verificável. Gere uma cópia preenchida do MODELO_EXTRACAO.xlsx, preservando as seis abas, os cabeçalhos e os tipos de dados.
+
+Entregue o Excel compatível com o dashboard e um resumo breve com quantidades, valores por natureza, cobertura real (edição completa ou recorte) e limitações.
