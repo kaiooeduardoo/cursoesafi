@@ -389,6 +389,113 @@ function drawBars(id, values, isCurrency = false) {
   }
 }
 
+// Composição por natureza: gráfico de rosca e legenda textual acessível.
+function drawDonut(id, categories) {
+  const parent = $(id);
+  parent.replaceChildren();
+  const positive = categories.filter((entry) => entry[1] > 0);
+  const total = positive.reduce((sum, entry) => sum + entry[1], 0);
+  if (!total) {
+    const empty = document.createElement("div");
+    empty.className = "empty";
+    empty.textContent = "Sem dados para os filtros selecionados.";
+    parent.appendChild(empty);
+    return;
+  }
+
+  const entries = positive.length > 6
+    ? [...positive.slice(0, 5), ["Outras naturezas", positive.slice(5).reduce((sum, row) => sum + row[1], 0)]]
+    : positive;
+  const palette = ["#39d2b7", "#68a5f5", "#ae91ef", "#efb862", "#e78fac", "#75c9a5"];
+  const percent = (value) => `${(value / total * 100).toLocaleString("pt-BR", {maximumFractionDigits: 1})}%`;
+  const wrap = document.createElement("div");
+  wrap.className = "donut-layout";
+  const graphic = document.createElement("div");
+  graphic.className = "donut-graphic";
+  graphic.setAttribute("role", "img");
+  graphic.setAttribute("aria-label", `Distribuição de ${total} instrumentos entre ${positive.length} naturezas. Consulte a legenda para as quantidades.`);
+
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 240 240");
+  svg.setAttribute("aria-hidden", "true");
+  svg.classList.add("donut-svg");
+  const track = document.createElementNS(ns, "circle");
+  track.setAttribute("cx", "120");
+  track.setAttribute("cy", "120");
+  track.setAttribute("r", "83");
+  track.setAttribute("fill", "none");
+  track.setAttribute("stroke", "#2a3c50");
+  track.setAttribute("stroke-width", "28");
+  svg.appendChild(track);
+
+  const position = (degrees) => {
+    const radians = degrees * Math.PI / 180;
+    return [120 + 83 * Math.cos(radians), 120 + 83 * Math.sin(radians)];
+  };
+  let angle = -90;
+  entries.forEach(([name, value], index) => {
+    const sweep = 360 * value / total;
+    const segment = document.createElementNS(ns, entries.length === 1 ? "circle" : "path");
+    if (entries.length === 1) {
+      segment.setAttribute("cx", "120");
+      segment.setAttribute("cy", "120");
+      segment.setAttribute("r", "83");
+      segment.setAttribute("fill", "none");
+    } else {
+      const gap = Math.min(2.2, sweep * 0.16);
+      const start = angle + gap / 2;
+      const end = angle + sweep - gap / 2;
+      const [sx, sy] = position(start);
+      const [ex, ey] = position(end);
+      segment.setAttribute("d", `M ${sx} ${sy} A 83 83 0 ${end - start > 180 ? 1 : 0} 1 ${ex} ${ey}`);
+      segment.setAttribute("fill", "none");
+    }
+    segment.setAttribute("stroke", palette[index]);
+    segment.setAttribute("stroke-width", "28");
+    segment.classList.add("donut-segment");
+    const title = document.createElementNS(ns, "title");
+    title.textContent = `${name}: ${integer.format(value)} (${percent(value)})`;
+    segment.appendChild(title);
+    svg.appendChild(segment);
+    angle += sweep;
+  });
+  const center = document.createElement("div");
+  center.className = "donut-center";
+  const number = document.createElement("strong");
+  number.className = "donut-total";
+  number.textContent = integer.format(total);
+  const description = document.createElement("span");
+  description.textContent = total === 1 ? "instrumento" : "instrumentos";
+  center.append(number, description);
+  graphic.append(svg, center);
+
+  const legend = document.createElement("div");
+  legend.className = "donut-legend";
+  for (const [index, [name, value]] of entries.entries()) {
+    const item = document.createElement("div");
+    item.className = "donut-legend-item";
+    item.title = name;
+    const dot = document.createElement("span");
+    dot.className = "donut-dot";
+    dot.style.backgroundColor = palette[index];
+    const label = document.createElement("span");
+    label.className = "donut-legend-name";
+    label.textContent = name;
+    const stat = document.createElement("span");
+    stat.className = "donut-legend-stat";
+    const count = document.createElement("strong");
+    count.textContent = integer.format(value);
+    const share = document.createElement("small");
+    share.textContent = percent(value);
+    stat.append(count, share);
+    item.append(dot, label, stat);
+    legend.appendChild(item);
+  }
+  wrap.append(graphic, legend);
+  parent.appendChild(wrap);
+}
+
 function officialLink(row) {
   const raw = row["URL PDF oficial"];
   if (missing(raw)) return "—";
@@ -417,7 +524,7 @@ function render() {
   $("k3").textContent = money.format(instruments.filter(isTed)
     .reduce((total, row) => total + amount(row["Valor original (R$)"]), 0));
   $("k4").textContent = integer.format(changes.length);
-  drawBars("categoryChart", aggregates(instruments, "Tipo de instrumento"));
+  drawDonut("categoryChart", aggregates(instruments, "Tipo de instrumento"));
   drawBars("orgChart", aggregates(instruments, "Órgão concedente", "Valor original (R$)"), true);
   $("tabInstrumentos").classList.toggle("on", tab === "Instrumentos");
   $("tabAditivos").classList.toggle("on", tab === "Aditivos");
