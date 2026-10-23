@@ -1,0 +1,2 @@
+"use strict";
+const b=document.getElementById('copiar');b.addEventListener('click',async()=>{const value=document.getElementById('prompt').textContent;try{await navigator.clipboard.writeText(value);document.getElementById('msg').textContent='Prompt copiado!'}catch(e){const a=document.createElement('textarea');a.value=value;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove();document.getElementById('msg').textContent='Prompt copiado!'}});

@@ -1,0 +1,10 @@
+# Arquivos locais e temporários
+.DS_Store
+Thumbs.db
+*.log
+.env
+.env.*
+node_modules/
+__pycache__/
+*.pyc
+*.zip
